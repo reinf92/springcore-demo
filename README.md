@@ -1,4 +1,4 @@
-## Spring-Core StudyDemo Source Repository
+## Spring-Core Demo Source Repository
 
 ### [Chapter1 : IoC 컨테이너와 빈](https://reinf92.github.io/posts/ioccontainer.beans/)
 
@@ -7,7 +7,7 @@
 - 빈(Bean)
 - 빈 설정 방법
 
-### [Chapter2 : DI(Dependency Injection)](https://reinf92.github.io/posts/di.component./)
+### [Chapter2 : DI(Dependency Injection)](https://reinf92.github.io/posts/di.component/)
 
 - DI?
 - 의존성 주입 어노테이션

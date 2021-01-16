@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--        <context:component-scan base-package="me.reinf.demo"/>-->
+
+<!--    <bean id="bookRepository" class="me.reinf.demo.chapter1.BookRepository"></bean>-->
+
+<!--    <bean id="bookService" class="me.reinf.demo.chapter1.BookService">-->
+<!--        &lt;!&ndash; 생성자를 이용한 의존성 주입 &ndash;&gt;-->
+<!--        <constructor-arg name="bookRepository" ref="bookRepository"></constructor-arg>-->
+
+<!--        &lt;!&ndash; 수정자를 이용한 의존성 주입 &ndash;&gt;-->
+<!--        <property name="bookRepository" ref="bookRepository"></property>-->
+<!--    </bean>-->
+
+    <bean id="perfAspect" class="me.reinf.demo.chapter10.PerfAspect"/>
+
+    <aop:config>
+        <!-- 등록된 빈을 Aspect로 등록 -->
+        <aop:aspect ref="perfAspect">
+            <!-- 포인트 컷 설정(특정 패키지 하위의 EventService 클래스의 모든 메서드) -->
+            <aop:pointcut id="event" expression="execution(* me.reinf..*.EventService.*(..))"/>
+            <!-- 어드바이스 적용 around, before -->
+            <aop:around method="logPerf" pointcut-ref="event"/>
+            <aop:before method="logBefore" pointcut-ref="event"/>
+        </aop:aspect>
+    </aop:config>
+
+    <beans profile="dev">
+        <bean id="databaseConfig" class="me.reinf.demo.chapter3.DevDatabaseConfig"/>
+    </beans>
+    <beans profile="product">
+        <bean id="databaseConfig" class="me.reinf.demo.chapter3.ProductDabaseConfig"/>
+    </beans>
+
+</beans>
